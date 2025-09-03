@@ -11,10 +11,11 @@ export class FirstPersonControls {
     this.crawlMultiplier = options.crawlMultiplier || 0.25;
     this.sensitivity = options.sensitivity || 0.002;
 
-    this.position = new THREE.Vector3();
+    this.position = camera.position.clone();
 
-    this.yaw = 0;
-    this.pitch = 0;
+    const euler = new THREE.Euler().copy(camera.rotation);
+    this.yaw = euler.y;
+    this.pitch = euler.x;
 
     this.keys = {
       w: false,

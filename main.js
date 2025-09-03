@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { FirstPersonControls } from './modules/firstPersonControls.js';
 import { LightsSetup } from './modules/init/lights.js';
+import { SceneObjectManager } from './modules/sceneObjectManager.js';
+
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
@@ -28,6 +30,18 @@ const controls = new FirstPersonControls(camera, renderer.domElement, scene, {
 });
 
 LightsSetup(scene);
+
+const objectManager = new SceneObjectManager(scene);
+
+// Example: Add a cube
+const cube = new THREE.Mesh(
+  new THREE.BoxGeometry(10, 10, 10),
+  new THREE.MeshStandardMaterial({ color: 0xff0000 })
+);
+objectManager.addObject('cube1', cube);
+
+// Example: Change color later
+objectManager.setColor('cube1', 0x00ff00);
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
