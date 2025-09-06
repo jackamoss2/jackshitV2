@@ -35,11 +35,11 @@ export class FirstPersonControls {
     this.crosshair = this._createCrosshair();
 
     // UI Overlay container div
-    this.uiOverlay = this._createUIOverlay();
-    document.body.appendChild(this.uiOverlay);
+    // this.uiOverlay = this._createUIOverlay();
+    // document.body.appendChild(this.uiOverlay);
 
-    this._updateUIPosition();
-    window.addEventListener('resize', () => this._updateUIPosition());
+    // this._updateUIPosition();
+    // window.addEventListener('resize', () => this._updateUIPosition());
 
     this.domElement.style.cursor = '';
 
@@ -47,7 +47,7 @@ export class FirstPersonControls {
     this._initPointerLock();
     this._initMouseButtons();
 
-    this._updateUI();
+    // this._updateUI();
   }
 
   frameObject(object3D) {
@@ -107,6 +107,7 @@ export class FirstPersonControls {
   }
 
   _updateUI() {
+    /*
     if (this.enabled) {
       this._infoText.innerHTML =
         `<div>WASD to move, Space/Shift to move up/down</div>
@@ -117,6 +118,7 @@ export class FirstPersonControls {
         `Press <b>E</b> to activate first person controls`;
     }
     this._updateUIPosition();
+    */
   }
 
   _createCrosshair() {
