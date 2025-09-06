@@ -3,12 +3,12 @@ import * as THREE from 'three';
 export class SceneObjectManager {
   constructor(scene) {
     this.scene = scene;
-    this.objects = new Map(); // key: id or name, value: mesh/object3D
+    this.objects = new Map();
   }
 
-  addObject(id, object3D) {
-    this.objects.set(id, object3D);
-    this.scene.add(object3D);
+  addObject(id, object) {
+    this.objects.set(id, object);
+    this.scene.add(object);
   }
 
   removeObject(id) {

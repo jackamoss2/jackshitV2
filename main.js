@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import { FirstPersonControls } from './modules/firstPersonControls.js';
 import { LightsSetup } from './modules/init/lights.js';
 import { SceneObjectManager } from './modules/sceneObjectManager.js';
+import { UIManager } from './modules/uiManager.js';
+
+
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
@@ -33,12 +36,43 @@ LightsSetup(scene);
 const objectManager = new SceneObjectManager(scene);
 window.objectManager = objectManager;
 
+
+
+// temp test cube
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(10, 10, 10),
   new THREE.MeshStandardMaterial({ color: 0xff0000 })
 );
 objectManager.addObject('cube1', cube);
 objectManager.setColor('cube1', 0x00ff00);
+
+
+
+// --- UI Manager ---
+const uiManager = new UIManager(resizeRendererToDisplaySize);
+
+uiManager.addLeftPanelButton({
+  id: 'info',
+  icon: 'ℹ️',
+  panelContent: 'Left Info panel content'
+});
+uiManager.addLeftPanelButton({
+  id: 'settings',
+  icon: '⚙️',
+  panelContent: 'Left Settings panel content'
+});
+
+uiManager.addRightPanelButton({
+  id: 'help',
+  icon: '❓',
+  panelContent: 'Right Help panel content'
+});
+uiManager.addRightPanelButton({
+  id: 'about',
+  icon: '🛈',
+  panelContent: 'Right About panel content'
+});
+
 
 function resizeRendererToDisplaySize() {
   const width = canvas.clientWidth;
