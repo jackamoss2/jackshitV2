@@ -1,5 +1,5 @@
 import { UIPanelManager } from './panelManager.js';
-import { panelButtons } from './panelButtons.js';
+import { panels } from './panels.js';
 
 export class UIManager {
   constructor(onResize) {
@@ -7,7 +7,7 @@ export class UIManager {
     this.rightPanelManager = new UIPanelManager('.right-panel-div', 'right', onResize);
 
     // Add buttons from config
-    panelButtons.forEach(cfg => {
+    panels.forEach(cfg => {
       if (cfg.side === 'left') {
         this.addLeftPanelButton(cfg);
       } else if (cfg.side === 'right') {
@@ -16,10 +16,11 @@ export class UIManager {
     });
   }
 
-  addLeftPanelButton({ id, icon, panelContent }) {
+  addLeftPanelButton({ id, icon, panelContent, title }) {
     const button = document.createElement('button');
     button.className = 'sidebar-icon';
     button.innerHTML = icon;
+    if (title) button.title = title; // <-- This line adds the tooltip
     button.onclick = (e) => {
       this.leftPanelManager.togglePanel({ id, content: panelContent });
       e.currentTarget.blur();

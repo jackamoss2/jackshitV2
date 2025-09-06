@@ -6,7 +6,7 @@ import { UIManager } from './modules/ui/uiManager.js';
 
 
 
-const scene = new THREE.Scene();
+export const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
 
 const camera = new THREE.PerspectiveCamera(

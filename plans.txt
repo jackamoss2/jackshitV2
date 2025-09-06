@@ -1,13 +1,23 @@
-ui panel: "data"
-    - list of files uploaded
-    - expand files like landXML with multiple objects
-        - surface 1
-        - surface 2
-        - ...
-    - ui panel direct visual of Working 3D Data
+Panels
+    -upload
+    -data
+        - list of files uploaded
+        - expand files like landXML with multiple objects
+            - surface 1
+            - surface 2
+            - ...
+        -each object has display options
+            -suface: show contours
+            -material (three js or design mat)
+    -tools
+        -info ray gun
+            -surface info
+            -face: connected points
+            -points: connected faces, elevation, info
+        -slope finder
+            -similar to Civil3D: add one-point slope label, or toggle mode for 2 point
+            df
 
 scene objects
     - scene holds three.js objects, but Working 3D Data object does not
     - three.js objects are created within functions that add to the scene, managed by Scene Manager
-    
-    
