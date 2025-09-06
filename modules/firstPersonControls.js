@@ -34,20 +34,18 @@ export class FirstPersonControls {
 
     this.crosshair = this._createCrosshair();
 
-    // UI Overlay container div
-    // this.uiOverlay = this._createUIOverlay();
-    // document.body.appendChild(this.uiOverlay);
-
-    // this._updateUIPosition();
-    // window.addEventListener('resize', () => this._updateUIPosition());
-
     this.domElement.style.cursor = '';
 
     this._initKeyboard();
     this._initPointerLock();
     this._initMouseButtons();
 
-    // this._updateUI();
+    // Only enter controls by clicking the canvas
+    this.domElement.addEventListener('click', () => {
+      if (!this.enabled) {
+        this._enterControls();
+      }
+    });
   }
 
   frameObject(object3D) {
@@ -77,48 +75,6 @@ export class FirstPersonControls {
 
     this.yaw = Math.atan2(-lookDir.x, -lookDir.z);
     this.pitch = Math.asin(lookDir.y);
-  }
-
-  _updateUIPosition() {
-    const rect = this.domElement.getBoundingClientRect();
-    this.uiOverlay.style.position = 'fixed';
-    this.uiOverlay.style.left = `${rect.left + 10}px`;
-    this.uiOverlay.style.top = `${rect.bottom - this.uiOverlay.offsetHeight - 10}px`;
-  }
-
-  _createUIOverlay() {
-    const container = document.createElement('div');
-    container.style.background = 'rgba(0, 0, 0, 0.4)';
-    container.style.color = 'white';
-    container.style.padding = '8px 12px';
-    container.style.borderRadius = '6px';
-    container.style.fontFamily = 'Arial, sans-serif';
-    container.style.fontSize = '14px';
-    container.style.maxWidth = '280px';
-    container.style.userSelect = 'none';
-    container.style.pointerEvents = 'none';
-    container.style.zIndex = '10000';
-    container.style.transition = 'opacity 0.3s ease';
-
-    this._infoText = document.createElement('div');
-    container.appendChild(this._infoText);
-
-    return container;
-  }
-
-  _updateUI() {
-    /*
-    if (this.enabled) {
-      this._infoText.innerHTML =
-        `<div>WASD to move, Space/Shift to move up/down</div>
-         <div>Hold Right Mouse to sprint, Ctrl to crawl</div>
-         <div style="margin-top:8px;">Press <b>E</b> to deactivate controls</div>`;
-    } else {
-      this._infoText.innerHTML =
-        `Press <b>E</b> to activate first person controls`;
-    }
-    this._updateUIPosition();
-    */
   }
 
   _createCrosshair() {
@@ -174,12 +130,9 @@ export class FirstPersonControls {
 
   _initKeyboard() {
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'KeyE') {
-        if (!this.enabled) {
-          this._enterControls();
-        } else {
-          this._exitControls();
-        }
+      // Only allow exit with Escape
+      if (this.enabled && e.code === 'Escape') {
+        this._exitControls();
         return;
       }
 
@@ -222,7 +175,6 @@ export class FirstPersonControls {
     this.domElement.style.cursor = 'none';
     this._ignoreFirstMouseMove = true;
     this.domElement.requestPointerLock();
-    this._updateUI();
   }
 
   _exitControls() {
@@ -233,7 +185,6 @@ export class FirstPersonControls {
     if (document.pointerLockElement === this.domElement) {
       document.exitPointerLock();
     }
-    this._updateUI();
   }
 
   _initPointerLock() {
