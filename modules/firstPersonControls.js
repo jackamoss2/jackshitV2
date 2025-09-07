@@ -40,7 +40,6 @@ export class FirstPersonControls {
     this._initPointerLock();
     this._initMouseButtons();
 
-    // Only enter controls by clicking the canvas
     this.domElement.addEventListener('click', () => {
       if (!this.enabled) {
         this._enterControls();
@@ -57,10 +56,8 @@ export class FirstPersonControls {
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
 
-    // Adjust this factor to get camera closer or farther
     const distance = size.length() * .2;
 
-    // Position camera offset relative to object center
     this.position.copy(center);
     this.position.x += distance;
     this.position.y += distance * 0.5;
@@ -69,7 +66,6 @@ export class FirstPersonControls {
     this.camera.position.copy(this.position);
     this.camera.lookAt(center);
 
-    // Reset yaw and pitch from new camera orientation
     const lookDir = new THREE.Vector3();
     this.camera.getWorldDirection(lookDir);
 
@@ -130,7 +126,6 @@ export class FirstPersonControls {
 
   _initKeyboard() {
     window.addEventListener('keydown', (e) => {
-      // Only allow exit with Escape
       if (this.enabled && e.code === 'Escape') {
         this._exitControls();
         return;

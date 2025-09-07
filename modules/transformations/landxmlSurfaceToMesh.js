@@ -2,22 +2,21 @@ import * as THREE from 'three';
 
 // LandXML: X (east), Y (north), Z (elev)
 // Three.js: X (right), Y (up), Z (back)
-// Typical mapping: X -> X, Y -> Z, Z -> Y
+// mapping: X -> X, Y -> Z, Z -> -Y
 
 export function landxmlSurfaceToMesh(surface, material = null) {
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
   const indices = [];
 
-  // Transform and push vertices
+  // transform and push vertices (points)
   surface.pnts.forEach(({ x, y, z }) => {
-    vertices.push(x, z, -y); // X, Z, -Y mapping
+    vertices.push(x, z, -y);
   });
 
-  // Faces (indices)
+  // faces (indices)
   surface.faces.forEach(idxArr => {
     if (idxArr.length === 3) {
-      // LandXML indices are 1-based
       indices.push(idxArr[0] - 1, idxArr[1] - 1, idxArr[2] - 1);
     }
   });

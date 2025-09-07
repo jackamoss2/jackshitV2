@@ -6,7 +6,7 @@ export class UIManager {
     this.leftPanelManager = new UIPanelManager('.left-panel-div', 'left', onResize);
     this.rightPanelManager = new UIPanelManager('.right-panel-div', 'right', onResize);
 
-    // Add buttons from config
+    // add buttons from config
     panels.forEach(cfg => {
       if (cfg.side === 'left') {
         this.addLeftPanelButton(cfg);
@@ -20,7 +20,7 @@ export class UIManager {
     const button = document.createElement('button');
     button.className = 'sidebar-icon';
     button.innerHTML = icon;
-    if (title) button.title = title; // <-- This line adds the tooltip
+    if (title) button.title = title;
     button.onclick = (e) => {
       this.leftPanelManager.togglePanel({ id, content: panelContent });
       e.currentTarget.blur();
@@ -28,6 +28,8 @@ export class UIManager {
     document.querySelector('.left-sidebar').appendChild(button);
   }
 
+
+  // not used but keeping for future reference
   addRightPanelButton({ id, icon, panelContent }) {
     const button = document.createElement('button');
     button.className = 'sidebar-icon';

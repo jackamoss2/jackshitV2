@@ -1,8 +1,8 @@
 export function processLandXML(xmlString) {
-  // For now, just log or stub
   console.log('Received LandXML data:', xmlString.slice(0, 200) + '...');
-  // TODO: parse and process LandXML
 }
+
+// move xml to surface out of this function, make this function just parse then call modules needed to return objects list
 
 export function parseLandXML(xmlString) {
   const parser = new DOMParser();
@@ -15,6 +15,7 @@ export function parseLandXML(xmlString) {
     const name = surfaceNode.getAttribute("name") || "Unnamed Surface";
     const pnts = [];
     const faces = [];
+
     // Parse points
     const pntsNode = surfaceNode.querySelector("Definition > Pnts");
     if (pntsNode) {
@@ -23,6 +24,7 @@ export function parseLandXML(xmlString) {
         pnts.push({ x, y, z });
       });
     }
+    
     // Parse faces
     const facesNode = surfaceNode.querySelector("Definition > Faces");
     if (facesNode) {

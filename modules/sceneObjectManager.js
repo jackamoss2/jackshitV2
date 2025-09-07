@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 export class SceneObjectManager {
   constructor(scene) {
     this.scene = scene;

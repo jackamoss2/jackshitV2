@@ -8,6 +8,9 @@ import { UIManager } from './modules/ui/uiManager.js';
 
 export const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
+LightsSetup(scene);
+
+
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -17,6 +20,8 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 50, 100);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+
 
 const canvas = document.getElementById('bg');
 const renderer = new THREE.WebGLRenderer({
@@ -31,7 +36,7 @@ const controls = new FirstPersonControls(camera, renderer.domElement, scene, {
   speed: 4
 });
 
-LightsSetup(scene);
+
 
 const objectManager = new SceneObjectManager(scene);
 window.objectManager = objectManager;
@@ -48,7 +53,6 @@ objectManager.setColor('cube1', 0x00ff00);
 
 
 
-// --- UI Manager ---
 const uiManager = new UIManager(resizeRendererToDisplaySize);
 
 function resizeRendererToDisplaySize() {

@@ -1,4 +1,3 @@
-// Simple in-memory store for surfaces
 const surfaces = [];
 
 export function addSurfaceToDataPanel(surface, mesh) {
@@ -22,7 +21,7 @@ export function createDataPanel() {
   return container;
 }
 
-// Helper to update the panel UI
+
 function updateDataPanel(containerOverride) {
   const container = containerOverride ||
     document.querySelector('.data-panel-content');

@@ -10,13 +10,13 @@ export class UIPanelManager {
   }
 
   showPanel({ id, content }) {
-    // Close all panels in all managers
+    // close all panels in all managers
     UIPanelManager.allManagers.forEach(manager => manager.closePanel());
 
     // hide any existing panel
     this.panelDiv.innerHTML = '';
 
-    // Create and show new panel
+    // create and show new panel
     const panel = document.createElement('div');
     panel.className = `ui-panel ui-panel-${this.side}`;
     panel.id = `panel-${id}`;

@@ -1,4 +1,4 @@
-import { parseLandXML } from './landxml.js';
+import { parseLandXML } from './landXML.js';
 import { landxmlSurfaceToMesh } from './transformations/landxmlSurfaceToMesh.js';
 import { addSurfaceToDataPanel } from './ui/panels/dataPanel.js';
 
@@ -11,7 +11,7 @@ export function handleFile(file, addMeshToScene) {
       surfaces.forEach(surface => {
         const mesh = landxmlSurfaceToMesh(surface);
         addMeshToScene(mesh);
-        addSurfaceToDataPanel(surface, mesh); // <-- Add this line
+        addSurfaceToDataPanel(surface, mesh);
       });
     };
     reader.readAsText(file);
